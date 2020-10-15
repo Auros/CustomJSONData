@@ -9,21 +9,21 @@ namespace CustomJSONData.CustomBeatmap
         public dynamic beatmapCustomData { get; }
         public dynamic levelCustomData { get; }
 
-        public CustomBeatmapData(BeatmapLineData[] beatmapLinesData, BeatmapEventData[] beatmapEventData, CustomEventData[] customEventData, dynamic customData, dynamic beatmapCustomData, dynamic levelCustomData)
-                          : base(beatmapLinesData, beatmapEventData)
+        public CustomBeatmapData(BeatmapData data, CustomEventData[] customEventData, dynamic customData, dynamic beatmapCustomData, dynamic levelCustomData)
+                          : base(200)
         {
+            base.CopyBeatmapEvents(data, this);
+            base.CopyBeatmapObjects(data, this);
             this.customData = customData;
             this.customEventData = customEventData;
             this.beatmapCustomData = beatmapCustomData;
             this.levelCustomData = levelCustomData;
         }
 
-        public override BeatmapData GetCopy()
+        public new BeatmapData GetCopy()
         {
-            BeatmapLineData[] beatmapLineDataCopy = GetBeatmapLineDataCopy();
-            BeatmapEventData[] beatmapEventDataCopy = GetBeatmapEventDataCopy();
             CustomEventData[] customEventDataCopy = GetCustomEventDataCopy();
-            return new CustomBeatmapData(beatmapLineDataCopy, beatmapEventDataCopy, customEventDataCopy, copy(customData), copy(beatmapCustomData), copy(levelCustomData));
+            return new CustomBeatmapData(base.GetCopy(), customEventDataCopy, copy(customData), copy(beatmapCustomData), copy(levelCustomData));
         }
 
         private CustomEventData[] GetCustomEventDataCopy()

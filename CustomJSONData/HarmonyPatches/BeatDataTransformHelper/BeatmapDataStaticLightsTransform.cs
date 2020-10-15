@@ -7,7 +7,7 @@ namespace CustomJSONData.HarmonyPatches
     [HarmonyPatch("CreateTransformedData")]
     internal class BeatmapDataStaticLightsTransformCreateTransformedData
     {
-        private static void Postfix(ref BeatmapData __result, BeatmapData beatmapData)
+        private static void Postfix(ref IReadonlyBeatmapData __result, BeatmapData beatmapData)
         {
             PostfixHelper(ref __result, beatmapData);
         }

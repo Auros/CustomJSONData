@@ -4,11 +4,11 @@ using static CustomJSONData.HarmonyPatches.BeatDataTransformHelperHelper;
 
 namespace CustomJSONData.HarmonyPatches
 {
-    [HarmonyPatch(typeof(BeatDataMirrorTransform))]
+    [HarmonyPatch(typeof(BeatmapDataMirrorTransform))]
     [HarmonyPatch("CreateTransformedData")]
     internal class BeatDataMirrorTransformCreateTransformData
     {
-        private static void Postfix(ref BeatmapData __result, BeatmapData beatmapData)
+        private static void Postfix(ref IReadonlyBeatmapData __result, BeatmapData beatmapData)
         {
             PostfixHelper(ref __result, beatmapData);
         }

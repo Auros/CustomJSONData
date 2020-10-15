@@ -10,11 +10,11 @@ namespace CustomJSONData.HarmonyPatches
 {
     internal class BeatDataTransformHelperHelper
     {
-        internal static void PostfixHelper(ref BeatmapData __result, BeatmapData beatmapData)
+        internal static void PostfixHelper(ref IReadonlyBeatmapData __result, BeatmapData beatmapData)
         {
             if (beatmapData is CustomBeatmapData customBeatmapData)
             {
-                __result = new CustomBeatmapData(__result.beatmapLinesData, __result.beatmapEventData,
+                __result = new CustomBeatmapData(beatmapData,
                     customBeatmapData.customEventData, customBeatmapData.customData, customBeatmapData.beatmapCustomData, customBeatmapData.levelCustomData);
             }
         }

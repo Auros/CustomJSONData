@@ -8,7 +8,7 @@ namespace CustomJSONData.CustomBeatmap
 {
     public class CustomBeatmapSaveData : BeatmapSaveData
     {
-        public CustomBeatmapSaveData(List<BeatmapSaveData.EventData> events, List<BeatmapSaveData.NoteData> notes, List<BeatmapSaveData.ObstacleData> obstacles) : base(events, notes, obstacles)
+        public CustomBeatmapSaveData(List<BeatmapSaveData.EventData> events, List<BeatmapSaveData.NoteData> notes, List<LongNoteData> longNotes, List<BeatmapSaveData.ObstacleData> obstacles) : base(events, notes, longNotes, obstacles)
         {
         }
 

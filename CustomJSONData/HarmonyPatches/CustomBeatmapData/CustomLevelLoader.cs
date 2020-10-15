@@ -14,8 +14,7 @@ namespace CustomJSONData.HarmonyPatches
             if (__result != null && __result is CustomBeatmapData customBeatmapData && standardLevelInfoSaveData is CustomLevelInfoSaveData lisd)
             {
                 __result = new CustomBeatmapData(
-                    __result.beatmapLinesData, 
-                    __result.beatmapEventData, 
+                    __result,
                     customBeatmapData.customEventData,
                     customBeatmapData.customData,
                     at(lisd.beatmapCustomDatasByFilename, difficultyFileName) ?? Tree(),

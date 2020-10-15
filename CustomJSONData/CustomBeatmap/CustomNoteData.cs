@@ -2,16 +2,17 @@
 {
     public class CustomNoteData : NoteData
     {
-        public CustomNoteData(int id, float time, int lineIndex, NoteLineLayer noteLineLayer, NoteLineLayer startNoteLineLayer, NoteType noteType, NoteCutDirection cutDirection,
+        /*public CustomNoteData(float time, int lineIndex, NoteLineLayer noteLineLayer, NoteLineLayer startNoteLineLayer, ColorType colorType, NoteCutDirection cutDirection,
                               float timeToNextBasicNote, float timeToPrevBasicNote, dynamic customData)
-                       : base(id, time, lineIndex, noteLineLayer, startNoteLineLayer, noteType, cutDirection, timeToNextBasicNote, timeToPrevBasicNote)
+                       : base(time, lineIndex, noteLineLayer, startNoteLineLayer, colorType, cutDirection, timeToNextBasicNote, timeToPrevBasicNote, duration)
         {
             this.customData = customData;
         }
+        */
 
-        public CustomNoteData(int id, float time, int lineIndex, NoteLineLayer noteLineLayer, NoteLineLayer startNoteLineLayer, NoteType noteType, NoteCutDirection cutDirection,
-                              float timeToNextBasicNote, float timeToPrevBasicNote, int flipLineIndex, float flipYSide, dynamic customData)
-                       : base(id, time, lineIndex, noteLineLayer, startNoteLineLayer, noteType, cutDirection, timeToNextBasicNote, timeToPrevBasicNote, flipLineIndex, flipYSide)
+        public CustomNoteData(float time, int lineIndex, NoteLineLayer noteLineLayer, NoteLineLayer startNoteLineLayer, ColorType colorType, NoteCutDirection cutDirection,
+                              float timeToNextBasicNote, float timeToPrevBasicNote, int flipLineIndex, float flipYSide, float duration, dynamic customData)
+                       : base(time, lineIndex, noteLineLayer, startNoteLineLayer, colorType, cutDirection, timeToNextBasicNote, timeToPrevBasicNote, flipLineIndex, flipYSide, duration)
         {
             this.customData = customData;
         }
@@ -20,7 +21,7 @@
 
         public override BeatmapObjectData GetCopy()
         {
-            return new CustomNoteData(id, time, lineIndex, noteLineLayer, startNoteLineLayer, noteType, cutDirection, timeToNextBasicNote, timeToPrevBasicNote, flipLineIndex, flipYSide, Trees.copy(customData));
+            return new CustomNoteData(time, lineIndex, noteLineLayer, startNoteLineLayer, colorType, cutDirection, timeToNextColorNote, timeToPrevColorNote, flipLineIndex, flipYSide, duration, Trees.copy(customData));
         }
     }
 }

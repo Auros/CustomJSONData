@@ -1,5 +1,6 @@
 ﻿using CustomJSONData.CustomBeatmap;
 using HarmonyLib;
+using IPA.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -146,7 +147,13 @@ namespace CustomJSONData.HarmonyPatches
                 customEvents.Add(new CustomEventData(realTime, customEventData.type, customEventData.data ?? Tree()));
             }
             customEvents = customEvents.OrderBy(x => x.time).ToList();
-            return new CustomBeatmapData(beatmapLineData, beatmapEventData, customEvents.ToArray(), customBeatmapSaveData.customData ?? Tree(), Tree(), Tree());
+            var data = new BeatmapData(beatmapLineData.Length);
+            data.SetField("_beatmapLinesData", beatmapLineData);
+            foreach (var d in beatmapEventData)
+            {
+                data.AddBeatmapEventData(d);
+            }
+            return new CustomBeatmapData(data, customEvents.ToArray(), customBeatmapSaveData.customData ?? Tree(), Tree(), Tree());
         }
 
         private struct BPMChangeData
@@ -185,7 +192,7 @@ namespace CustomJSONData.HarmonyPatches
                     instructionList[i].operand == _getBeatmapData)
                 {
                     foundGetBeatmapData = true;
-                    instructionList.Insert(i, new CodeInstruction(OpCodes.Ldloc_3));
+                    instructionList.Insert(i, new CodeInstruction(OpCodes.Ldloc_S, 4));
                     instructionList.Insert(i + 1, new CodeInstruction(OpCodes.Call, _storeCustomEventsSaveData));
                 }
             }
